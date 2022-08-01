@@ -1,6 +1,22 @@
 use notan::math::{Mat4, Quat, Rng, Vec2, Vec3};
 use notan::math::rand::thread_rng;
+use notan::prelude::Color;
 use crate::Random;
+
+pub const STAR_COLORS: [u32; 12] = [
+    0xe7ecfe,
+    0xf5f7ff,
+    0xfefefe,
+    0xfffbe5,
+    0xfff3bd,
+    0xffd48a,
+    0xffa38a,
+    0xf7805f,
+    0xee4f3a,
+    0xdf3c26,
+    0xdf3c26,
+    0xaf3627
+];
 
 
 pub fn transform2d(scale: Vec2, rot_angle: f32, translate: Vec2) -> Mat4
@@ -41,6 +57,9 @@ pub fn generate_galaxy_vectors(size: i32, arm_separation_dist: f32, arm_offset_m
         x += rnd_offset_x;
         y += rnd_offset_y;
 
-        [x, y]
+        // colors
+        let rnd_color = Color::from_hex(STAR_COLORS[rnd.gen_range(0..STAR_COLORS.len())]);
+
+        [x, y, rnd_color.r, rnd_color.g, rnd_color.b]
     }).collect::<Vec<f32>>()
 }

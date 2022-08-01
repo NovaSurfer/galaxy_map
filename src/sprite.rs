@@ -15,12 +15,7 @@ pub const QUAD_VERTICES: [f32; 16] = [
 
 pub const QUAD_INDICES: [u32; 6] = [0, 1, 3, 1, 2, 3];
 
-pub const COLORS: [Color; 4] = [
-    Color::WHITE,
-    Color::RED,
-    Color::GREEN,
-    Color::YELLOW
-];
+
 
 //language=glsl
 pub const SPRITE_FRAGMENT: ShaderSource = fragment_shader! {
