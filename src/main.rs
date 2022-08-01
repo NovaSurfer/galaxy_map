@@ -49,27 +49,21 @@ fn init(app: &mut App, gfx: &mut Graphics) -> State {
         .build()
         .unwrap();
 
-    let camera = Camera2d::new(0.0,
-                               app.window().width() as f32,
-                               app.window().height() as f32,
-                               0.0,
-                               50.0,
-                               50.0);
-
-    const ARM_SEPARATION_DIST: f32 = 2.0 * std::f32::consts::PI / 1.0;
+    let (scr_x, scr_y) = (app.window().width() as f32, app.window().height() as f32);
+    let camera = Camera2d::new(0.0, scr_x, scr_y, 0.0, 50.0, 50.0);
+    const ARM_SEPARATION_DIST: f32 = 2.0 * std::f32::consts::PI / 5.0;
     let galaxy_offsets = generate_galaxy_vectors(STARS_NUM, ARM_SEPARATION_DIST, 0.0, 0.0, 0.0);
-    let transform = Transform2d::new(vec2(400.0, 300.0), vec2(32.0, 32.0), 0.0);
+    let transform = Transform2d::new(vec2(scr_x * 0.5, scr_y * 0.5), vec2(texture.width(), texture.height()), 0.0);
     let mut sprite = Sprite::new(texture, transform);
     let mvp = camera.view_projection * sprite.transform.constructed();
     let sprite_array_buff = SpriteArrayBuff::new(gfx, &galaxy_offsets, mvp);
-
 
     let pipeline = gfx
         .create_pipeline()
         .from(&sprite::SPRITE_VERTEX, &sprite::SPRITE_FRAGMENT)
         .with_vertex_info(&sprite_array_buff.vert_info)
         .with_vertex_info(&sprite_array_buff.vert_offset_info)
-        .with_color_blend(BlendMode::NORMAL)
+        .with_color_blend(BlendMode::ADD)
         .with_texture_location(0, "u_texture")
         .build()
         .unwrap();
@@ -123,6 +117,7 @@ fn draw(app: &mut App, gfx: &mut Graphics, state: &mut State) {
     renderer.draw_instanced(0, 6, STARS_NUM);
     renderer.end();
     gfx.render(&renderer);
+
     // drawing text
     let mut draw = gfx.create_draw();
     draw.text(
@@ -136,6 +131,5 @@ fn draw(app: &mut App, gfx: &mut Graphics, state: &mut State) {
     )
         .position(10.0, 10.0)
         .size(24.0);
-
     gfx.render(&draw);
 }

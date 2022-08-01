@@ -29,7 +29,6 @@ impl SpriteArrayBuff
             .build()
             .unwrap();
 
-
         // vert offsets
         let vertex_offset_info = VertexInfo::new()
             .attr(2, VertexFormat::Float32x2)
