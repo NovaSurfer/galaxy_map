@@ -18,20 +18,20 @@ impl Transform2d
         }
     }
 
-    // pub fn set_postion(&mut self, pos: Vec2)
-    // {
-    //     self.position = pos;
-    // }
+    pub fn set_postion(&mut self, pos: Vec2)
+    {
+        self.position = pos;
+    }
 
     pub fn constructed(&mut self) -> Mat4
     {
         transform2d(self.scale,
-                           self.rotation,
-                           Vec2::new(0.5 * self.scale.x + self.position.x, 0.5 * self.scale.y + self.position.y))
+                    self.rotation,
+                    Vec2::new(0.5 * self.scale.x + self.position.x, 0.5 * self.scale.y + self.position.y))
     }
 }
 
-fn transform2d(scale: Vec2, rot_angle: f32, translate: Vec2) -> Mat4
+pub fn transform2d(scale: Vec2, rot_angle: f32, translate: Vec2) -> Mat4
 {
     Mat4::from_scale_rotation_translation(Vec3::new(scale.x, scale.y, 0.0),
                                           Quat::from_axis_angle(Vec3::Z, rot_angle),

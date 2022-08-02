@@ -72,7 +72,7 @@ impl Camera2d
         self.view_projection = self.projection * self.view;
     }
 
-    fn reload_view_matrix(&mut self)
+    pub fn reload_view_matrix(&mut self)
     {
         let transform = Mat4::from_rotation_translation(Quat::from_axis_angle(Vec3::Z, 0.0), vec3(self.position.x, self.position.y, 0.0));
         self.view = transform.inverse();
