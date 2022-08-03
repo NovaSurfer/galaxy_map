@@ -1,8 +1,7 @@
 use notan::app::Texture;
-use notan::{fragment_shader, vertex_shader};
 use notan::math::Mat4;
 use notan::prelude::ShaderSource;
-use crate::transform2d::Transform2d;
+use notan::{fragment_shader, vertex_shader};
 
 #[rustfmt::skip]
 pub const QUAD_VERTICES: [f32; 16] = [
@@ -67,23 +66,17 @@ pub const SPRITE_VERTEX: ShaderSource = vertex_shader! {
     "#
 };
 
-pub struct SpriteArray
-{
+pub struct SpriteArray {
     pub texture: Texture,
     pub transform: Mat4,
 }
 
-impl SpriteArray
-{
+impl SpriteArray {
     pub const fn new(texture: Texture, transform: Mat4) -> Self {
-        Self{
-            texture,
-            transform,
-        }
+        Self { texture, transform }
     }
 
-    pub fn set_transform(&mut self, transform: Mat4)
-    {
+    pub fn set_transform(&mut self, transform: Mat4) {
         self.transform = transform;
     }
 }

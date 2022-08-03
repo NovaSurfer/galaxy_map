@@ -1,9 +1,8 @@
-use notan::math::{Mat4};
-use notan::prelude::{Buffer, Graphics, VertexFormat, VertexInfo, VertexStepMode};
 use crate::sprite::{QUAD_INDICES, QUAD_VERTICES};
+use notan::math::Mat4;
+use notan::prelude::{Buffer, Graphics, VertexFormat, VertexInfo, VertexStepMode};
 
-pub struct SpriteArrayBuff
-{
+pub struct SpriteArrayBuff {
     pub vbo: Buffer,
     pub instanced_vbo: Buffer,
     pub ebo: Buffer,
@@ -13,10 +12,8 @@ pub struct SpriteArrayBuff
     pub vert_instanced_info: VertexInfo,
 }
 
-impl SpriteArrayBuff
-{
-    pub fn new(gfx: &mut Graphics, offsets: &Vec<f32>, cam_view_project: &Mat4) -> Self
-    {
+impl SpriteArrayBuff {
+    pub fn new(gfx: &mut Graphics, offsets: &Vec<f32>, cam_view_project: &Mat4) -> Self {
         // vert buff
         let vertex_info = VertexInfo::new()
             .attr(0, VertexFormat::Float32x2)
@@ -64,8 +61,7 @@ impl SpriteArrayBuff
             .build()
             .unwrap();
 
-        Self
-        {
+        Self {
             vbo: vertex_buff,
             instanced_vbo: vertex_instanced_buff,
             ebo: index_buffer,
