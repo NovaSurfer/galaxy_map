@@ -30,6 +30,7 @@ const SCALE_ARRAY: [f32; 4] =
 pub struct GalaxyConfig
 {
     pub size: i32,
+    pub arm_numb: f32,
     pub arm_separation_dist: f32,
     pub arm_offset_max: f32,
     pub rotation_factor: f32,
